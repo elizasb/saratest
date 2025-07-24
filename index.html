@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your College Surveys</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    .link-list a {
+      display: block;
+      margin: 10px 0;
+      color: #004488;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+    .link-list a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Surveys for Your Colleges</h1>
+  <div class="link-list" id="surveyLinks"></div>
+
+  <script>
+    const collegeMap = {
+      "agricultural-sciences": {
+        url: "https://example.com/survey-ag-sciences",
+        label: "College of Agricultural Sciences"
+      },
+      "arts-and-architecture": {
+        url: "https://example.com/survey-arts",
+        label: "College of Arts and Architecture"
+      },
+      "communications": {
+        url: "https://example.com/survey-comm",
+        label: "Bellisario College of Communications"
+      },
+      "div-of-undergraduate-studies": {
+        url: "https://example.com/survey-dus",
+        label: "Division of Undergraduate Studies"
+      },
+      "earth-and-mineral-sciences": {
+        url: "https://example.com/survey-ems",
+        label: "College of Earth and Mineral Sciences"
+      },
+      "education": {
+        url: "https://example.com/survey-education",
+        label: "College of Education"
+      },
+      "engineering": {
+        url: "https://example.com/survey-engineering",
+        label: "College of Engineering"
+      },
+      "health-and-human-development": {
+        url: "https://example.com/survey-hhd",
+        label: "College of Health and Human Development"
+      },
+      "information-sciences-and-tech": {
+        url: "https://example.com/survey-ist",
+        label: "College of IST"
+      },
+      "liberal-arts": {
+        url: "https://example.com/survey-la",
+        label: "College of the Liberal Arts"
+      },
+      "nursing": {
+        url: "https://example.com/survey-nursing",
+        label: "Ross and Carol Nese College of Nursing"
+      },
+      "science": {
+        url: "https://example.com/survey-science",
+        label: "Eberly College of Science"
+      },
+      "smeal-college-of-business": {
+        url: "https://example.com/survey-smeal",
+        label: "Smeal College of Business"
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const collegeParam = params.get("colleges");
+
+    if (collegeParam) {
+      const collegeKeys = collegeParam.toLowerCase().split(",");
+      const container = document.getElementById("surveyLinks");
+
+      collegeKeys.forEach(key => {
+        const entry = collegeMap[key.trim()];
+        if (entry) {
+          const a = document.createElement("a");
+          a.href = entry.url;
+          a.textContent = entry.label;
+          container.appendChild(a);
+        }
+      });
+    } else {
+      document.getElementById("surveyLinks").textContent = "No colleges provided in the URL.";
+    }
+  </script>
+</body>
+</html>
